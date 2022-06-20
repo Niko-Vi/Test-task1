@@ -1,17 +1,16 @@
 # Test-task1
 Реализуйте функции сериализации и десериализации двусвязного списка, заданного следующим образом:
 
-    class ListNode
-    {
- public ListNode Prev;
-        public ListNode Next;
-        public ListNode Rand; // произвольный элемент внутри списка;
+    class ListNode {
+        public ListNode Prev;
+        public ListNode Next;        
+        public ListNode Rand; // произвольный элемент внутри списка
+        
         public string Data;
     }
 
 
-    class ListRand
-    {
+    class ListRand {
         public ListNode Head;
         public ListNode Tail;
         public int Count;
