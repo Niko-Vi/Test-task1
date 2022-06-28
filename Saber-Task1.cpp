@@ -68,8 +68,6 @@ public:
     }
 };
 
-
-
 class ListRand {
 public:
     ListNode* Head;
@@ -98,7 +96,6 @@ public:
                 }
             }
         }
-
     }
 
     void addNode(std::string newNodeData) {
@@ -117,7 +114,6 @@ public:
     void setRand(int fromNodeNum, int toNodeNum) {
         IteratorLN it = Head;
         IteratorLN rIt = Head;
-        it +=4;
         for (int i = 0; i < fromNodeNum; ++i) {
             if (it->Next != nullptr) {
                 ++it;
@@ -173,8 +169,10 @@ public:
     void Deserialize(std::ifstream& s) {
         std::stringstream buf1;
         std::string buf;
-        int key;
+        int key, i;
         std::vector<int> keys;
+        std::vector<ListNode*> pointers;
+        IteratorLN iter;
 
         std::getline(s, buf); // reading keys from first line
         buf1 << buf;
@@ -183,14 +181,18 @@ public:
         }
         buf1.clear();
 
-        while (std::getline(s, buf)) {
+        while (std::getline(s, buf)) {//creating nodes from strings of data
             addNode(buf);
         }
-
-        for (int i = 0; i < Count; ++i) {
-            if (keys[i] != NULL) { // check if not zero
-                setRand(i, keys[i] - 1); // -1 because keys count from 1, but elements count from 0
-            }
+        iter = Head;
+        for (i = 0; i < Count; i++) { //writing down pointers for direct access
+            pointers.push_back(*iter);
+            ++iter;
+        }
+        iter = Head;
+        for (i = 0; i < Count; i++) {// setting rands
+            iter->Rand = pointers[keys[i]-1];
+            ++iter;
         }
     }
 };
