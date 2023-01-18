@@ -12,19 +12,19 @@ public:
     ListNode* Rand; // произвольный элемент внутри списка
     std::string Data;
 
-    ListNode() : Prev(nullptr), Next(nullptr), Rand(nullptr), Data("") {
+    ListNode() : Prev(this), Next(this), Rand(this), Data("") {
     }
     ListNode(std::string str) {
         Data = str;
-        Prev = nullptr;
-        Next = nullptr;
-        Rand = nullptr;
+        Prev = this;
+        Next = this;
+        Rand = this;
     }
     ListNode(std::string str, ListNode* Prev) {
         Data = str;
         this->Prev = Prev;
-        Next = nullptr;
-        Rand = nullptr;
+        Next = this;
+        Rand = this;
     }
 };
 
@@ -32,10 +32,15 @@ class IteratorLN {
     ListNode* ptr;
 public:
     IteratorLN() {
-        ptr = nullptr;
+        ptr = new ListNode("empty");
     }
     IteratorLN(ListNode* p) {
         ptr = p;
+    }
+    ~IteratorLN(){
+    if(ptr->Data == "empty"){
+        delete ptr;
+    }
     }
 
     IteratorLN* operator++() {
@@ -237,6 +242,7 @@ int main()
         }
         ++it;
     }
+
     return 0;
 }
 
