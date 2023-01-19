@@ -117,6 +117,10 @@ public:
     }
 
     void setRand(int fromNodeNum, int toNodeNum) {
+        if(Head == nullptr){
+            std::cerr << "List is empty" << std::endl;
+            return;
+        }
         IteratorLN it = Head;
         IteratorLN rIt = Head;
         for (int i = 0; i < fromNodeNum; ++i) {
@@ -141,6 +145,10 @@ public:
     }
 
     void Serialize(std::ofstream& s) {
+        if(Head == nullptr){
+            std::cerr << "List is empty" << std::endl;
+            return;
+        }
         std::map<ListNode*, int> pMap; // map need to save keys for Rand elements
         IteratorLN lnIt = Head;
         int i;
